@@ -1,32 +1,63 @@
-EXP: 07-AI CHASING
-Aim:
-To implement-chasing when AI see the player.
-Algorithm:
-STEP-1: Set up the AI character Blueprint and add a Sphere Collision component to the AI
-character Blueprint and position and scale the Sphere Collision component to represent the AI's
-detection range.
-STEP-2: Create a new AI controller Blueprint and select Create Basic Asset > Blueprint
-Class from that choose the AIController as the parent class.
-STEP-3: Open the AIController Blueprint and drag off the execution line and search for "Set
-Sight Radius" where the Sight Radius value to the desired range for the AI's vision.
-STEP-4: Implement perception for the AI and connect the output of the AI Perception
-Component node to the AI Controller's .AI Perception property in the AI Perception
-Component node, configure the settings for sight and sight sense
-STEP-5: Implement the chase behaviour if the stimulus is the player character, drag off the
-execution line and search for "Move To Actor" and set the Move To Actor node's target to
-the player character.
-STEP-6: Create blackboard keys for the AI and create a new blackboard object and assign it
-to the AIController's Blackboard property. Drag off the execution line again and search for
-"Create Blackboard Key".
-STEP-7: Update blackboard values. Set the Blackboard Key to the "PlayerLocation" key
-you created earlier.
-STEP-8: Set up the Behavior Tree by Open the Behavior Tree asset in the Behavior Tree
-editor.
+# AI Random Roam with Chase - Unreal Engine
 
-Output:
+## 🎯 Aim
+To create an AI character in Unreal Engine that roams randomly within a NavMesh area and chases the player when they come within a certain range, using Behavior Trees, Blackboard, and AI Perception.
 
-//paste your output screenshot here
+## 🛠 Procedure
 
+1. *Setup Navigation*
+   - Add a NavMeshBoundsVolume to your level and scale it to cover the roamable area.
+   - Press *P* to confirm the green nav area is visible (indicating navigable space).
 
-Result:
-Thus, the AI concept to the actor for a random movement
+2. *Create AI Character*
+   - Create a Blueprint character (e.g., BP_AIEnemy) with a skeletal mesh and AIController class.
+   - Create an AI Controller Blueprint (e.g., BP_AIController) and assign it to the character.
+
+3. *Enable AI Perception*
+   - In BP_AIController, add an AIPerception component.
+   - Configure a *Sight* sense (set detection range, lose sight range, peripheral vision angle).
+   - Bind OnPerceptionUpdated to update a blackboard value (e.g., CanSeePlayer and PlayerActor).
+
+4. *Set Up Blackboard*
+   - Create a Blackboard with the following keys:
+     - TargetLocation (Vector)
+     - PlayerActor (Object)
+     - CanSeePlayer (Bool)
+
+5. *Create Behavior Tree (BT_AI)*
+   - Structure it like this:
+
+     
+     Root
+     └── Selector
+         ├── Sequence (Chase Player)
+         │   ├── Blackboard Check: CanSeePlayer == true
+         │   └── Move To: PlayerActor
+         └── Sequence (Random Roam)
+             ├── Task: Find Random Location → TargetLocation
+             └── Move To: TargetLocation
+     
+
+6. *Custom Task: Find Random Location*
+   - Create a new BTTask_BlueprintBase to get a random reachable point using:
+     cpp
+     UNavigationSystemV1::GetRandomReachablePointInRadius()
+     
+   - Set the result to the TargetLocation blackboard key.
+
+7. *Test the AI*
+   - Add a player character to the level.
+   - Place the AI enemy in the map and assign its controller and behavior tree.
+   - Press *Play*: the AI should roam when the player is far and chase the player when within sight.
+  
+
+## Output
+
+![Screenshot 2025-05-15 103308](https://github.com/user-attachments/assets/9ec08412-d028-409d-9406-f88c29d8d854)
+
+![Screenshot 2025-05-15 103442](https://github.com/user-attachments/assets/a8d84f39-4b48-43a7-9d85-66c63d5e8566)
+
+![Screenshot 2025-05-09 105437](https://github.com/user-attachments/assets/da7e454b-1c33-4aad-98ad-5a95929a121b)
+
+## ✅ Result
+The AI character roams randomly within a defined area. When the player enters its sight range, the AI stops roaming and begins to chase the player until the player is out of sight, after which it resumes roaming.
