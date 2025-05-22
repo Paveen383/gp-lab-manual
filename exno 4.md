@@ -1,56 +1,97 @@
-EXP-04: Attach Rifle with character mesh and bullet spawn from Rifle.
-.Aim:
-To Attach Rifle with character mesh and implementation bullet spawn from Rifle
-Algorithm:
-1: Import the character mesh and rifle model into your game engine or development
-environment. Ensure that both assets are properly rigged and prepared for animation.
-2: Create an attachment point on the character's hand or shoulder where the rifle will be
-attached. This can be achieved by adding a socket or bone to the character's skeleton.
-3: Attach the rifle model to the character's attachment point using the appropriate parenting or
-socketing mechanism provided by your game engine. This will ensure that the rifle follows the
-character's movements and animations correctly.
-4: Implement the logic for bullet spawning. You'll need to determine the position and
-direction from which the bullets should be spawned based on the rifle's barrel. Usually, this
-involves creating a spawn point on the rifle model, such as the barrel tip.
-5: When the player triggers the shooting action (e.g., pressing a button or clicking the
-mouse), instantiate a bullet object at the spawn point you determined in the previous step. The
-bullet object should have its own movement and collision logic.
-6: Set the initial velocity and direction of the bullet based on the rifle's orientation and any
-additional factors you want to consider, such as recoil or spread.
-7: Continue updating the bullet's position and check for collisions or other interactions until it
-reaches its target or goes out of bounds. Handle any necessary effects or damage
-calculations upon collision.
-8: Repeat the bullet spawning process as needed whenever the player triggers the shooting
-action.
-To implement the score widget:
-1 : Create a score variable: Declare a variable to keep track of the player's score. For
-example, you can initialize it to zero at the beginning of the game.
-2: Detect bullet-object collision: Implement a collision detection system to detect when a
-bullet collides with an object. This can vary depending on the game engine or framework
-you are using. Typically, you would check for collisions between the bullet and the object
-using3: Handle collision events: When a collision between a bullet and an object is detected,
-trigger a collision event or callback function. This function will be responsible for handling
-the specific actions associated with the collision.
-4: Increase the score: Inside the collision event function, increment the score variable by a
-certain amount. For example, you can add one point to the score every time a bullet hits an
-object.
-5: Update the score widget: After increasing the score, update the score widget to display the
-updated score value. This can be done by accessing the score widget element or object and
-setting its text or value to the updated score variable.
-6: Display the score widget: Ensure that the score widget is visible to the player during
-gameplay. This might involve placing it in a prominent position on the screen or integrating it
-into the game's user interface (UI) system.
-7: Repeat the process: Repeat steps 2 to 6 for each object that the player can interact with
-or shoot at. Whenever a bullet collides with an object, increase the score and update the score
-widget accordingly.
-8: Optional: Add visual and audio feedback: To enhance the player's experience, you can
-consider adding visual and audio feedback when a bullet hits an object. For example, you might
-display a particle effect or play a sound effect to signify a successful hit.
-Output:
+# Unreal-EXNO-04-Attach-Rifle-with-character-mesh-and-implementation-bullet-spawn-from-Rifle-
+## Experiment:04 
+Attach Rifle with character mesh and implementation bullet spawn from Rifle
+## AIM:
+To Attach Rifle with character mesh and implementation bullet spawn from Rifle .
 
-//paste your output screenshot here
+## ALGORITHM(for attach rifle with character mesh):
+```
+
+1.	Import the rifle asset:	
+•	Open your project in Unreal Engine.
+•	Go to the Content Browser.
+•	Right-click in the desired folder and select Import.
+•	Locate and select your rifle asset file.
+•	Configure the import settings as needed.
+•	Click Import to bring the rifle asset into your project.
+2.	Create a socket on the character mesh:	
+•	Open your project in Unreal Engine.
+•	Go to the Content Browser.
+•	Right-click in the desired folder and select Import.
+•	Locate and select your rifle asset file.
+•	Configure the import settings as needed.
+•	Click Import to bring the rifle asset into your project.
+3.	Add the rifle to the character Blueprint:	
+•	Open your project in Unreal Engine.
+•	Go to the Content Browser.
+•	Right-click in the desired folder and select Import.
+•	Locate and select your rifle asset file.
+•	Configure the import settings as needed.
+•	Click Import to bring the rifle asset into your project.
+4.	Adjust the rifle's position and rotation:	
+•	Open your project in Unreal Engine.
+•	Go to the Content Browser.
+•	Right-click in the desired folder and select Import.
+•	Locate and select your rifle asset file.
+•	Configure the import settings as needed.
+•	Click Import to bring the rifle asset into your project.
+5.	Test the attached rifle:
+•	Open your project in Unreal Engine.
+•	Go to the Content Browser.
+•	Right-click in the desired folder and select Import.
+•	Locate and select your rifle asset file.
+•	Configure the import settings as needed.
+•	Click Import to bring the rifle asset into your project.
+
+```
+## ALGORITHM(for implementing bullet spawn from rifle):
+
+1.	Create a bullet projectile:
+•	In the Content Browser, right-click in the desired folder.
+•	Select Create Basic Asset > Blueprint Class.
+•	In the Class Settings window, search for "Projectile" and select it as the parent class.
+•	Name the Blueprint (e.g., "BulletProjectile") and click Create.
+2.	Set up the bullet projectile:
+•	Open the BulletProjectile Blueprint.
+•	In the Blueprint editor, locate the Components panel on the left.
+•	Add a Static Mesh component to represent the visual representation of the bullet.
+•	Adjust the Static Mesh component's properties as desired (e.g., mesh, scale, materials, etc.).
+•	Add any other necessary components (e.g., collision, audio, particle effects) to enhance the bullet's behavior.
+3.	Set up the rifle Blueprint:
+•	Open the rifle Blueprint that is attached to the character (refer to the previous steps on attaching the rifle).
+•	In the Blueprint editor, locate the Event Graph tab.
+•	Find the event that triggers the firing action (e.g., "Fire" button press).
+•	Create a new custom event node for spawning the bullet projectile.
+•	Drag off the custom event node and search for "Spawn Actor from Class".
+•	Connect the execution line from the event node to the Spawn Actor node.
+4.	Configure the Spawn Actor node:
+•	In the Spawn Actor node, select the BulletProjectile Blueprint as the Class.
+•	Connect the execution line from the Spawn Actor node to any necessary nodes or logic related to the firing action (e.g., setting the bullet's initial velocity, applying recoil to the rifle, playing firing sound).
+5.	Adjust the spawn location and rotation:
+•	Drag off the Spawn Actor node and search for "Get Socket Transform".
+•	Select the character's rifle socket (the socket where the bullet should spawn).
+•	Connect the output of the Get Socket Transform node to the Spawn Transform input of the Spawn Actor node.
+6.	Test the bullet spawning:
+•	Compile and save the rifle Blueprint and BulletProjectile Blueprint.
+•	Play the game to test the character's firing action.
+•	Ensure that when the firing action is triggered, the bullet projectile is spawned from the rifle's socket with the desired behavior.
+ 
+## OUTPUT:
+## ARROW FUNCTION:
+![image](https://github.com/Prethiveerajan/Unreal-EXNO-04-Attach-Rifle-with-character-mesh-and-implementation-bullet-spawn-from-Rifle-/assets/94233064/41b00164-91a1-48ec-9721-cec2c8d6bd16)
 
 
-Result:
-To Attach Rifle with character mesh and implementation bullet spawn from Rifle is
-implemen
+ 
+## BULLET ACTOR:
+![image](https://github.com/Prethiveerajan/Unreal-EXNO-04-Attach-Rifle-with-character-mesh-and-implementation-bullet-spawn-from-Rifle-/assets/94233064/92175a25-4230-4f70-aa5c-67244efd0de8)
+
+ 
+
+## BULLET SPAWN:
+![image](https://github.com/Prethiveerajan/Unreal-EXNO-04-Attach-Rifle-with-character-mesh-and-implementation-bullet-spawn-from-Rifle-/assets/94233064/c1516adc-8962-40b7-aa54-c41e5f00ac1e)
+
+
+ 
+
+## RESULT:
+Thus, Rifle is Attached with character mesh and implementation bullet spawn from Rifle is done 
